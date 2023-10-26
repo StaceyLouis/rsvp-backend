@@ -1,0 +1,23 @@
+body{
+    background-color: #e3e3e3;
+}
+header{
+    width: 100vw;
+    background-color: rgb(10, 29, 22);
+    margin-top: -23px;
+    padding: 5px;
+    margin-left: -15px;
+    text-align: center;
+    color: rgb(171, 164, 164);
+     
+}
+
+button{
+    background-color: rgb(5, 82, 89);
+    border: none;
+    color: white;
+    font-weight: bolder;
+    padding: 8px;
+    width: 70px;
+    margin: 10px 0;
+}
