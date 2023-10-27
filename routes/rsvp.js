@@ -28,29 +28,6 @@ router.all((req,res, next)=>{
      res.status(400).json({message: err.message})
     }
 })
-.put("/:id",(req,res)=>{
-
-    const id = req.params.id
-    const query = Model.findById(id);
-    const update = {
-      "$set": {
-        "post": req.body.post,
-        "checked": req.body.checked
-      }
-    };
-    const options = { returnNewDocument: true };
-    
-    return Model.findOneAndUpdate(query, update, options)
-      .then(updatedDocument => {
-        if(updatedDocument) {
-          console.log(`Successfully updated document: ${updatedDocument}.`)
-        } else {
-          console.log("No document matches the provided query.")
-        }
-        return updatedDocument
-      })
-      .catch(err => console.error(`Failed to find and update document: ${err}`))
-})
 .delete("/:id", async (req,res)=>{
     const id = req.params.id
     const todo = await Model.findByIdAndDelete(id)
