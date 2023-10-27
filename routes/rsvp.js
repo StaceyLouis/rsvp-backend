@@ -17,8 +17,9 @@ router.all((req,res, next)=>{
 })
 .post('/', (req,res)=>{
     const data = new Model({
-        post: req.body.post,
-        checked: req.body.checked
+        name: req.body.name,
+        email: req.body.email,
+        attending: req.body.checked
     })
     try{
         const saveData = data.save()
