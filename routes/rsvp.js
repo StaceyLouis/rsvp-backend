@@ -17,7 +17,8 @@ router.all((req,res, next)=>{
 })
 .post('/', (req,res)=>{
     const data = new Model({
-        post: req.body.post,
+        name: req.body.name,
+        email: req.body.email,
         checked: req.body.checked
     })
     try{
