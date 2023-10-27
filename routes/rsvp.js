@@ -19,7 +19,7 @@ router.all((req,res, next)=>{
     const data = new Model({
         name: req.body.name,
         email: req.body.email,
-        checked: req.body.checked
+        attending: req.body.checked
     })
     try{
         const saveData = data.save()
