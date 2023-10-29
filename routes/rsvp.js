@@ -16,13 +16,13 @@ router.all((req,res, next)=>{
     }
 })
 .post('/', async (req,res)=>{
-    const data = new Model({
+    const rsvp = new Model({
         name: req.body.name,
         email: req.body.email,
         attending: req.body.attending
     })
     try{
-        const saveData = data.save()
+        const saveData = rsvp.save()
         res.status(200).json(saveData)
     }catch(err){
      res.status(400).json({message: err.message})
