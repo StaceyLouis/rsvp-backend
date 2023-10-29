@@ -15,16 +15,20 @@ router.all((req,res, next)=>{
         res.status(400).json({message: err.message})
     }
 })
-.post('/', async(req,res)=>{
-    const rsvp = req.body;
-    const savedRsvp = await saveRsvp(rsvp);
-
-    res.send({
-        status: 'success',
-        message: 'Your RSVP has been saved.',
-      });
+.post('/', async (req,res)=>{
+    const rsvp = new Model({
+        name: req.body.name,
+        email: req.body.email,
+        attending: req.body.attending
+    })
+    try{
+        const saveData = rsvp.save()
+        res.status(200).json(saveData)
+    }catch(err){
+     res.status(400).json({message: err.message})
+    }
+    
 })
-
 .delete("/:id", async (req,res)=>{
     const id = req.params.id
     const todo = await Model.findByIdAndDelete(id)
@@ -34,16 +38,5 @@ router.all((req,res, next)=>{
         res.status(400).json({message: err.message})
     }
 })
-
-async function saveRsvp(rsvp) {
-    // Connect to the database
-    const db = await connectToDatabase();
-  
-    // Insert the RSVP data into the database
-    await db.query('INSERT INTO rsvps (name, email, attending) VALUES (?, ?, ?)', [rsvp.name, rsvp.email, rsvp.attending]);
-  
-    // Close the database connection
-    await db.end();
-  }
 
 module.exports = router
