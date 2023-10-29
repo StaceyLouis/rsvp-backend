@@ -15,20 +15,23 @@ router.all((req,res, next)=>{
         res.status(400).json({message: err.message})
     }
 })
-.post('/', async (req,res)=>{
-    const rsvp = new Model({
-        name: req.body.name,
-        email: req.body.email,
-        attending: req.body.attending
+.post('/', async (req, res) => {
+    // Get the RSVP data from the request body
+    const rsvp = req.body;
+  
+    // Create a new RSVP model
+    const newRsvp = new Model(rsvp);
+  
+    // Save the RSVP model to the database
+    await newRsvp.save();
+  
+    // Send a response to the client
+    res.send({
+      status: 'success',
+      message: 'Your RSVP has been saved.',
     })
-    try{
-        const saveData = rsvp.save()
-        res.status(200).json(saveData)
-    }catch(err){
-     res.status(400).json({message: err.message})
-    }
-    
-})
+  })
+
 .delete("/:id", async (req,res)=>{
     const id = req.params.id
     const todo = await Model.findByIdAndDelete(id)
